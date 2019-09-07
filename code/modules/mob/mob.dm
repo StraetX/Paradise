@@ -740,9 +740,9 @@ var/list/slot_equipment_priority = list( \
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
-	var/human_respawn_time = 2000
+	var/human_respawn_time = 10000
 	var/timedifference = world.time - timeofdeath
-	var/timedifference_text = time2text(human_respawn_time * 600 - timedifference,"mm:ss")
+	var/timedifference_text = time2text((human_respawn_time/5) * 600 - timedifference,"mm:ss")
 
 	if(!abandon_allowed)
 		to_chat(usr, "<span class='warning'>Respawning is disabled.</span>")
@@ -751,6 +751,7 @@ var/list/slot_equipment_priority = list( \
 	if(stat != DEAD || !SSticker)
 		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
 		return
+
 	if(stat == DEAD && timeofdeath+human_respawn_time >= world.time)
 		to_chat(usr, "<span class='boldnotice'>До возврата в игру осталось: [timedifference_text]</span>")
 		return
@@ -777,6 +778,7 @@ var/list/slot_equipment_priority = list( \
 
 	M.key = key
 	return
+
 
 /mob/verb/observe()
 	set name = "Observe"
