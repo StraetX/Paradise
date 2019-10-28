@@ -2203,7 +2203,7 @@
 		if(!input)
 			qdel(P)
 			return
-		input = admin_pencode_to_html(html_encode(input)) // Encode everything from pencode to html
+		input = admin_pencode_to_html(rhtml_encode(input)) // Encode everything from pencode to html
 
 		var/customname = clean_input("Pick a title for the fax.", "Fax Title", , owner)
 		if(!customname)
@@ -3333,10 +3333,10 @@
 			var/title = ""
 			while(query_view_book.NextRow())
 				content = query_view_book.item[1]
-				title = html_encode(query_view_book.item[2])
+				title = rhtml_encode(query_view_book.item[2])
 
 			var/dat = "<pre><code>"
-			dat += "[html_encode(html_to_pencode(content))]"
+			dat += "[rhtml_encode(html_to_pencode(content))]"
 			dat += "</code></pre>"
 
 			var/datum/browser/popup = new(usr, "admin_view_book", "[title]", 700, 400)
