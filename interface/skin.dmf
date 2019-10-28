@@ -1,8 +1,14 @@
-macro 
-
 macro "default"
 	elem 
 		name = "T"
+		command = ".say"
+
+macro "macro1"
+	elem 
+		name = "T"
+		command = ".say"
+	elem 
+		name = "CTRL+T"
 		command = ".say"
 
 
