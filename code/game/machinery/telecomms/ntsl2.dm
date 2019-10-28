@@ -222,8 +222,8 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 	. = list()
 	for(var/variable in to_serialize)
 		.[variable] = vars[variable]
-	. = json_encode(.)
-	
+	. = r_json_encode(.)
+
 // This loads a configuration from a JSON string.
 // Fucking broken as shit, someone help me fix this.
 /datum/nttc_configuration/proc/nttc_deserialize(text, obj/machinery/computer/telecomms/traffic/source, var/ckey)
@@ -256,7 +256,7 @@ GLOBAL_DATUM_INIT(nttc_config, /datum/nttc_configuration, new())
 			if(!islist(variable))
 				return list()
 			// Insert html filtering for the regexes here if you're boring
-			var/newlist = json_decode(html_decode(json_encode(variable)))
+			var/newlist = json_decode(rhtml_decode(r_json_encode(variable)))
 			if(!islist(newlist))
 				return null
 			return newlist
