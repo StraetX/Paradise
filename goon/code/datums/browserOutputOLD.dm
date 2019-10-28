@@ -149,13 +149,12 @@ var/list/chatResources = list(
 				var/list/row = connectionHistory[i]
 				if(!row || row.len < 3 || !(row["ckey"] && row["compid"] && row["ip"]))
 					return
-				if(world.IsBanned(row["ckey"], row["compid"], row["ip"]))
+				if(world.IsBanned(row["ckey"], row["ip"], row["compid"], FALSE))
 					found = row
 					break
-
+			//Add autoban using the DB_ban_record function
 			//Uh oh this fucker has a history of playing on a banned account!!
 			if (found.len > 0)
-				//TODO: add a new evasion ban for the CURRENT client details, using the matched row details
 				message_admins("[key_name(src.owner)] has a cookie from a banned account! (Matched: [found["ckey"]], [found["ip"]], [found["compid"]])")
 				log_admin("[key_name(src.owner)] has a cookie from a banned account! (Matched: [found["ckey"]], [found["ip"]], [found["compid"]])")
 
@@ -222,7 +221,7 @@ var/to_chat_filename
 var/to_chat_line
 var/to_chat_src
 // Call using macro: to_chat(target, message, flag)
-/proc/__to_chat(target, message, flag)
+/proc/to_chat_immediate(target, message, flag)
 	if(!is_valid_tochat_message(message) || !is_valid_tochat_target(target))
 		target << message
 
@@ -266,7 +265,6 @@ var/to_chat_src
 
 		if(C && C.chatOutput)
 			if(C.chatOutput.broken)
-				message=r_text2ascii(message)
 				C << message
 				return
 
@@ -274,10 +272,15 @@ var/to_chat_src
 				C.chatOutput.messageQueue.Add(message)
 				return
 
-		message = r_text2unicode(message)
 		// url_encode it TWICE, this way any UTF-8 characters are able to be decoded by the javascript.
 		var/output_message = "[url_encode(url_encode(message))]"
 		if(flag)
 			output_message += "&[url_encode(flag)]"
 
 		target << output(output_message, "browseroutput:output")
+
+/proc/__to_chat(target, message, flag)
+	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
+		to_chat_immediate(target, message, flag)
+		return
+	SSchat.queue(target, message, flag)
