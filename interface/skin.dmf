@@ -1,7 +1,4 @@
-macro "default"
-	elem 
-		name = "T"
-		command = ".say"
+macro "Off"
 
 macro "macro1"
 	elem 
