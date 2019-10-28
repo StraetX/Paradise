@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // reference: /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 
 /datum/proc/can_vv_get(var_name)
@@ -1386,7 +1385,7 @@
 	if(href_list["listrefresh"])
 		debug_variables(locate(href_list["listrefresh"]))
 		return TRUE
-=======
+/*
 // reference: /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 
 /datum/proc/can_vv_get(var_name)
@@ -2779,4 +2778,4 @@
 	if(href_list["listrefresh"])
 		debug_variables(locate(href_list["listrefresh"]))
 		return TRUE
->>>>>>> cf53695... Фулл русиш
+*/

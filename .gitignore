@@ -22,3 +22,4 @@ data/
 stddef.dm
 .atom-build.json
 *.vscode/*
+paradise.dme
