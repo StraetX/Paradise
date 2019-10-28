@@ -1,4 +1,10 @@
+macro 
+
 macro "default"
+	elem 
+		name = "T"
+		command = ".say"
+
 
 menu "menu"
 	elem 
@@ -38,6 +44,21 @@ menu "menu"
 		name = "&Size"
 		command = ""
 		category = "&Icons"
+		saved-params = "is-checked"
+	elem 
+		name = "&Scaling"
+		command = ""
+		category = "&Icons"
+		saved-params = "is-checked"
+	elem "textmode"
+		name = "&Text"
+		command = ".winset \"menu.textmode.is-checked=true?mapwindow.map.text-mode=true:mapwindow.map.text-mode=false\""
+		category = "&Icons"
+		can-check = true
+		saved-params = "is-checked"
+	elem 
+		name = "&Size"
+		command = ""
 		saved-params = "is-checked"
 	elem "stretch"
 		name = "&Stretch to fit"
@@ -85,7 +106,6 @@ menu "menu"
 	elem 
 		name = "&Scaling"
 		command = ""
-		category = "&Icons"
 		saved-params = "is-checked"
 	elem "NN"
 		name = "&Nearest Neighbor"
@@ -107,12 +127,6 @@ menu "menu"
 		category = "&Scaling"
 		can-check = true
 		group = "scale"
-		saved-params = "is-checked"
-	elem "textmode"
-		name = "&Text"
-		command = ".winset \"menu.textmode.is-checked=true?mapwindow.map.text-mode=true:mapwindow.map.text-mode=false\""
-		category = "&Icons"
-		can-check = true
 		saved-params = "is-checked"
 	elem 
 		name = "&Help"
@@ -386,10 +400,11 @@ window "rpane"
 window "browserwindow"
 	elem "browserwindow"
 		type = MAIN
-		pos = 0,0
+		pos = 281,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Browser"
 		is-pane = true
@@ -399,6 +414,7 @@ window "browserwindow"
 		size = 640x499
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		is-default = true
 		saved-params = ""
 		on-show = ".winset\"rpane.infob.is-visible=true?rpane.infob.pos=130,7;rpane.textb.is-visible=true;rpane.browseb.is-visible=true;rpane.browseb.is-checked=true;rpane.rpanewindow.pos=0,30;rpane.rpanewindow.size=0x0;rpane.rpanewindow.left=browserwindow\""
