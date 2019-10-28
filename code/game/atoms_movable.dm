@@ -8,6 +8,7 @@
 	var/pull_force = PULL_FORCE_DEFAULT
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
+	glide_size = 8
 	var/l_move_time = 1
 	var/datum/thrownthing/throwing = null
 	var/throw_speed = 2 //How many tiles to move per ds when being thrown. Float values are fully supported
