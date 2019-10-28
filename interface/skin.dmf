@@ -1,6 +1,4 @@
-macro "Off"
-
-macro "macro1"
+macro "default"
 	elem 
 		name = "T"
 		command = ".say"
